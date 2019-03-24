@@ -34,7 +34,7 @@ function ifJavaCode(text){
 	if(text == "")
 		text = "New Folder";
 	res1 = 'import java.io.File;\npublic class IfCodeJava {\n\tpublic void createFolder(String foldername){\n\t\tFile newFolder = new File(foldername);\n\t\tif(newFolder.isDirectory())\n\t\t\tnewFolder = new File(foldername+" (1)");\n\t\tnewFolder.mkdir();\n\t}\n\tpublic static void main(String [] args){\n\t\tIfCodeJava x = new IfCodeJava();\n\t\tx.createFolder("'+text+'");\n\t}\n}';
-	res2 = "We check if the folder name is inside our computer. If this is true, we create the folder but add (1) at the end. if the file doesn't exist, we create it with same name.";
+	res2 = "We check if the folder name (" +text+") is inside our computer <br>{{ if(newFolder.isDirectory()) }}.<br> If this is true, we create the folder but add (1) at the end so the file name will be " +text+"(1)  . If the file doesn't exist, we create it with same name " +text+".";
 	tab = "&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	res3 = 'File newFolder = new File("'+text+'");<br>if(newFolder.isDirectory())<br>'+tab+'newFolder = new File('+text+' (1));<br>newFolder.mkdir();';
 	return [res1,res2,res3];
@@ -44,7 +44,7 @@ function ifPythonCode(text){
 	if(text == "")
 		text = "New Folder";
 	res1='import pathlib\nimport os\nif os.path.isdir("'+text+'"):\n\tpathlib.Path("'+text+' (1)").mkdir(parents=True, exist_ok=True)\nelse:\n\tpathlib.Path("'+text+'").mkdir(parents=True, exist_ok=True)';
-	res2="We check if the folder name is inside our computer. If this is true, we create the folder but add (1) at the end. if the file doesn't exist, we create it with same name.";
+	res2="We check if the folder name (" +text+") is inside our computer <br>{{ if os.path.isdir('"+text+"'): }}.<br>  If this is true, we create the folder but add (1) at the end so the file name will be " +text+"(1) <br> {{ pathlib.Path('"+text+" (1)') }}<br>. If the file doesn't exist, we create it with same name " +text+".";
 	tab="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	res3='if os.path.isdir("'+text+'"):<br>'+tab+'pathlib.Path("'+text+' (1)").mkdir(parents=True, exist_ok=True)<br>else:<br>'+tab+'pathlib.Path("'+text+'").mkdir(parents=True, exist_ok=True)';
 	return [res1,res2,res3];
@@ -56,7 +56,7 @@ function forPythonCode(folders,text){
 	if(folders == "")
 		folders = 1;
 	res1 = 'import pathlib\nimport os\nfor i in range('+folders+'):\n\tpath = '+text+' ("+str(i+1)+")"\n\tpathlib.Path(path).mkdir(parents=True, exist_ok=True)';
-	res2 = "This output code loops to generate n folders based on the input number. The folders created are named according to the following nameing convention: NAME (N); where name is the input folder name and N is a number between 1 and input number.";
+	res2 = "This output code loops <br>{{ for i in range("+ folders+ "):}}<br> to generate n folders based on the input number "+folders+". The folders created are named ("+text+") according to the following nameing convention: NAME (i); <br> {{ pathlib.Path(path).mkdir(parents=True, exist_ok=True); }}<br> where name is the input folder name and i is a number between 1 and input number.";
 	tab="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	res3 = 'for i in range('+folders+'):<br>'+tab+'path = "'+text+' ("+str(i+1)+")"<br>'+tab+'pathlib.Path(path).mkdir(parents=True, exist_ok=True)';
 	return [res1,res2,res3];
@@ -68,7 +68,7 @@ function forJavaCode(folders,text){
 	if(folders == "")
 		folders = 1;
 	res1 = 'import java.io.File;\npublic class ForCodeJava{\n\tpublic void createFolders(int folders, String foldername){\n\t\tfor (int i = 0; i < '+folders+'; i++){\n\t\t\tFile newFolder = new File("'+text+' ("+(i+1)+")");\n\t\t\tnewFolder.mkdir();\n\t\t}\n\t}\n\tpublic static void main(String [] args){\n\t\tForCodeJava x = new ForCodeJava();\n\t\tx.createFolders('+folders+', "'+text+'");\n\t}\n}';
-	res2 = "This output code loops to generate n folders based on the input number. The folders created are named according to the following nameing convention: NAME (N); where name is the input folder name and N is a number between 1 and input number.";
+	res2 = "This output code loops <br>{{ for (int i = 0; i < +"+folders+"+; i++)}}<br>to generate n folders based on the input number "+folders+". The folders created are named ("+text+") according to the following nameing convention: NAME (i); <br> {{ File newFolder = new File("+text+"(i)); }}<br> where name is the input folder name and i is a number between 1 and input number.";
 	tab="&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp";
 	res3 = 'for (int i = 0; i < '+folders+'; i++){<br>'+tab+'File newFolder = new File("'+text+' ("+(i+1)+")";<br>'+tab+'newFolder.mkdir();\n}';
 	return [res1,res2,res3];
